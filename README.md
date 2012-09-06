@@ -17,3 +17,21 @@ Depends on
 * Shell scripts
 * KVM
 
+Steps to create virtual machine
+-------------------------------
+
+You
+* start script on your client machine
+* provide vm parameters (name, disk size etc..)
+
+Script
+* generates ssh keys for vm
+* TODO saves private key on your machine
+* TODO sets up ~/.ssh/config
+* creates installation files (preseed, late command etc..)
+* moves installation files to kvm server via ssh
+* creates qcow2 image for vm
+* starts virt-install with setups to network boot debian
+* injects installation files to vm's initrd
+* instructions in preseed.cfg do the rest (packages, ssh keys)
+
