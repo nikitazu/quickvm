@@ -72,5 +72,6 @@ echo virt-install \
 	--graphics vnc,password="$QVM_HOST",port="$QVM_VNC_PORT",listen=0.0.0.0 \
 	--extra-args="preseed/file=/preseed.cfg" \
 	--initrd-inject="$QVM_PRESEED" \
-	--initrd-inject="$QVM_SSHP" \
-	--initrd-inject="$QVM_PRESEED_LATE"
+	--initrd-inject="$QVM_SSH".pub \
+	--initrd-inject="$QVM_PRESEED_LATE" \
+	--initrd-inject="$QVM_CFG"
