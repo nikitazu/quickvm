@@ -1,30 +1,48 @@
 #!/bin/sh
 
-EXPECTED_ARGS=5
-E_BADARGS=65
+EXPECTED_ARGS=6 # do i really need this?
+E_BADARGS=65    # and this?
 
 if [ $# -ne $EXPECTED_ARGS ]; then
   echo error: wrong arguments
-  echo usage: qvm.create vmhost vmdescr vmdsize vmid vmmac
+  echo usage: qvm.create vmhost vmdescr vmdsize vmid vmmac vmserver
   exit $E_BADARGS
 fi
 
-
+# here we do things
 QVM_ROOT="`pwd`/test"
+
+# vm name and hostname
 QVM_HOST="$1"
 QVM_DESCRIPTION="$2"
+
+# here we do things with this vm
 QVM_DIR="$QVM_ROOT/$QVM_HOST".d
+
+# ssh keys
 QVM_SSH="$QVM_DIR/id_dsa_$QVM_HOST"
 QVM_DISK="$QVM_DIR/$QVM_HOST".qcow2
+
+# size of vm disk to create in gigabytes
 QVM_DISK_SIZE="$3"
+
+# debian autoinstaller scripts
 QVM_PRESEED="$QVM_DIR/preseed.cfg"
 QVM_PRESEED_LATE="$QVM_DIR/preseed.late.sh"
 QVM_CFG="$QVM_DIR/qvm.config"
 
+# temporary desicion, id is needed to create sane
+# ports for services, ip addressed etc..
 QVM_ID="$4"
 QVM_MAC="52:54:00:00:00:$5"
 QVM_VNC_PORT="590$QVM_ID"
 QVM_SSH_PORT="1986$QVM_ID"
+
+# remote server with linux, kvm and ssh
+QVM_SERVER="$5"
+
+# vm will be stored here (path on remote server)
+QVM_SERVER_ROOT="/mnt/data/kvm/$QVM_HOST"
 
 
 echo making vm dir in $QVM_DIR
