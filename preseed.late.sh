@@ -7,7 +7,7 @@ source /qvm.config
 
 QVM_SSH_HOME="/target/root/.ssh"
 QVM_SSH_KEY="id_dsa_$QVM_HOST".pub
-QVM_SSH_CFG=/etc/ssh/sshd_config
+QVM_SSH_CFG="/target/etc/ssh/sshd_config"
 
 echo making ssh dir
 mkdir -p /target/root/.ssh
