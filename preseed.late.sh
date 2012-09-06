@@ -32,5 +32,5 @@ perl -pi -e 's/#AuthorizedKeysFile     %h/.ssh/authorized_keys/AuthorizedKeysFil
 ### ##############
 
 echo geekrulez>/target/root/geekrulez
-echo $QVM_HOST>/target/root/geekrulez
+echo "$QVM_HOST">>/target/root/geekrulez
 
