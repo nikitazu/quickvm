@@ -107,6 +107,8 @@ $QVMS qemu-img create -f qcow2 -o preallocation=metadata $QVM_DISK "$QVM_DISK_SI
 
 # note --description value is UGLY
 echo making vm $QVM_HOST
+echo `date`>$QVM_DIR/installation_started_at
+
 $QVMS virt-install \
 	--name $QVM_HOST \
 	--description "'$QVM_DESCRIPTION'" \

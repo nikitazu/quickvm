@@ -13,10 +13,10 @@ echo making ssh dir
 mkdir -p /target/root/.ssh
 
 echo copying ssh public key
-cp "/$QVM_SSH_KEY" "$QVM_SSH_HOME/$QVM_SSH_KEY"
+cp "/$QVM_SSH_KEY" "$QVM_SSH_HOME/$QVM_SSH_KEY" #fixme
 
 echo authorizing ssh public key
-cat "/$QVM_SSH_KEY" >>"$QVM_SSH_HOME"/authorized_keys
+cat "/$QVM_SSH_KEY" >>"$QVM_SSH_HOME"/authorized_keys #fixme
 
 echo allowing root only acces to key
 chmod 600 -R "$QVM_SSH_HOME"
@@ -32,3 +32,5 @@ perl -pi -e 's/#AuthorizedKeysFile     %h/.ssh/authorized_keys/AuthorizedKeysFil
 ### ##############
 
 echo geekrulez>/target/root/geekrulez
+echo $QVM_HOST>/target/root/geekrulez
+
