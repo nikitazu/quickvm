@@ -21,7 +21,7 @@ fi
 
 
 # here we do things
-QVM_ROOT="`pwd`/test"
+QVM_ROOT="$(pwd)/test"
 
 # vm name and hostname
 QVM_HOST="$1"
@@ -78,6 +78,9 @@ echo making vm ssh keys $QVM_SSH
 echo TODO: copy ssh private key to client machine
 ssh-keygen -t dsa -N $QVM_HOST -C $QVM_HOST -f $QVM_SSH
 
+echo making vm sshd config
+cat sshd_config | sed s/@port/$QVM_SSH_PORT/ >>$QVM_DIR/sshd_config
+
 echo making preseed $QVM_PRESEED
 cp preseed.cfg "$QVM_PRESEED"
 cp preseed.late.sh "$QVM_PRESEED_LATE"
@@ -107,7 +110,7 @@ $QVMS qemu-img create -f qcow2 -o preallocation=metadata $QVM_DISK "$QVM_DISK_SI
 
 # note --description value is UGLY
 echo making vm $QVM_HOST
-echo `date`>$QVM_DIR/installation_started_at
+echo "$(date)">$QVM_DIR/installation_started_at
 
 $QVMS virt-install \
 	--name $QVM_HOST \
@@ -125,6 +128,7 @@ $QVMS virt-install \
 	--initrd-inject="$QVM_SERVER_DIR/preseed.cfg" \
 	--initrd-inject="$QVM_SERVER_DIR/id_dsa_$QVM_HOST".pub \
 	--initrd-inject="$QVM_SERVER_DIR/preseed.late.sh" \
-	--initrd-inject="$QVM_SERVER_DIR/qvm.config"
+	--initrd-inject="$QVM_SERVER_DIR/qvm.config" \
+	--initrd-inject="$QVM_SERVER_DIR/sshd_config"
 
 exit 0
