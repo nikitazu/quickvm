@@ -122,7 +122,7 @@ $QVMS virt-install \
     --os-variant debiansqueeze \
 	--hvm \
 	--noautoconsole \
-	--network bridge=br0,mac="$QVM_MAC" \
+	--network bridge=br0,mac="$QVM_MAC",model=virtio \
 	--graphics vnc,password="$QVM_HOST",port="$QVM_VNC_PORT",listen=0.0.0.0 \
 	--extra-args="preseed/file=/preseed.cfg" \
 	--initrd-inject="$QVM_SERVER_DIR/preseed.cfg" \
