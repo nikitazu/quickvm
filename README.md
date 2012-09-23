@@ -35,3 +35,10 @@ Script
 * injects installation files to vm's initrd
 * instructions in preseed.cfg do the rest (packages, ssh keys)
 
+
+Todo
+----
+
+* remote logging
+* ror
+* rewrite everything in perl, python or ruby
